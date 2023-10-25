@@ -1,19 +1,50 @@
 import java.util.Scanner;
 
 public class Armstrongnumber {
-    void length(int num){
 
+    static int findLenght(int num) {
+
+        int count = 0;
+        while (num != 0) {
+            num /= 10;
+            count++;
+        }
+        return count;
     }
-    void power(int base,int exponent){
 
+    static int findPower(int base, int exp) {
+        int powerValue = 1;
+        for (int i = 1; i <= exp; i++) {
+            powerValue *= base;
+        }
+        return powerValue;
     }
-    void armstrongnumber( int num){
 
+    static int isArmstrong(int num) {
+        int numberCopy = num;
+        int numLenght = findLenght(numberCopy);
+        int sum = 0;
+        while (num != 0) {
+            int lastDigit = num % 10; 
+            sum += findPower(lastDigit, numLenght);
+            num /= 10;
+        }
+        return sum;
     }
 
     public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in)
-        
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a number");
+        int number = scanner.nextInt();
+        int finalRes = isArmstrong(number);
+
+        if (finalRes == number) {
+            System.out.println("Armstrong");
+        } else {
+            System.out.println("Not Armstrong");
+        }
+        scanner.close();
+
     }
-    
 }
